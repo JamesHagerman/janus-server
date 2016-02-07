@@ -45,7 +45,7 @@ function Server() {
     console.log('Startup date/time: ' + Date());
 
     serverObject = net.createServer(onConnect);
-    server.listen(config.port, "::", function(err) {
+    serverObject.listen(config.port, "::", function(err) {
       if (err) {
         log.error('Socket Server error listening on port: ' + config.port);
         process.exit(1);

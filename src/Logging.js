@@ -31,7 +31,7 @@ if (args.debug) {
   npmlog.stream = fs.createWriteStream('server.log', {
     'flags': 'a'
   });
-  npmlog.stream.write('------------- Restart -----------------');
+  npmlog.stream.write('\n------------- Restart -----------------\n');
 
   // TODO: Useless switch statement:
   switch (config.logLevel) {
