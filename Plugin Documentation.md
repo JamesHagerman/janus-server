@@ -1,10 +1,10 @@
 # Plugins
 
-A plugin must implement ```Plugin()``` and ```Plugin.prototype.call()```.
+A plugin must implement `Plugin()` and `Plugin.prototype.call()`.
 
-```Plugin()``` will be called when the plugin is first loaded, do any initialization here.
+`Plugin()` will be called when the plugin is first loaded, do any initialization here.
 
-```Plugin.prototype.call()``` will vary depending on the plugin type.
+`Plugin.prototype.call()` will vary depending on the plugin type.
 
 ## methodPlugins
 
@@ -25,7 +25,6 @@ Plugin.prototype.call = function(data) {
 }
 
 module.exports = Plugin;
-
 ```
 
 To load the plugin, add it to 'config.js':
@@ -37,9 +36,10 @@ To load the plugin, add it to 'config.js':
     },
 ```
 
-```Plugin.prototype.call()``` will now be called any time a client sends a command with the method "example".
+`Plugin.prototype.call()` will now be called any time a client sends a command
+with the method "example".
 
-```data``` will have the following additional attributes:
+`data` will have the following additional attributes:
 
 * _userId - The userId of the calling client.
 
@@ -53,7 +53,7 @@ To load the plugin, add it to 'config.js':
 
 Now, when a client sends
 
-```json
+``` json
 { "method": "example" }
 ```
 
@@ -67,7 +67,8 @@ the server will reply
 
 Hook plugins add functions to an existing method.
 
-You might hook the "logon" method to perform user authentication, or the "enter_room" method to check if a user is authorized to enter.
+You might hook the "logon" method to perform user authentication, or the
+"enter_room" method to check if a user is authorized to enter.
 
 Here is an example of a minimal hook plugin:
 
@@ -97,16 +98,16 @@ To load the plugin, add it to 'config.js':
 ```
     /* hookPlugins are called while parsing messages */
     hookPlugins: {  
-        enter_room: { 
+        enter_room: {
             plugins: [ "janus-hook-example" ]
         }
     },
 
 ```
 
-```Plugin.prototype.call()``` will now be called any time the "enter_room" method is called.
+`Plugin.prototype.call()` will now be called any time the "enter_room" method is called.
 
-```data``` will have the following additional attributes:
+`data` will have the following additional attributes:
 
 * _userId - The userId of the calling client.
 
@@ -149,4 +150,4 @@ To load the plugin, add it to 'config.js':
     ],
 ```
 
-```Plugin.prototype.call()``` will now be called every 5 seconds.
+`Plugin.prototype.call()` will now be called every 5 seconds.
