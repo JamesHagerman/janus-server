@@ -13,9 +13,13 @@ function Plugins(server) {
 }
 
 Plugins.prototype.intervalLoad = function() {
-  // TODO: Document this. I have no idea what this is doing...
+  // Load the list of plugins from the config file
   var plugins = config.intervalPlugins;
 
+  // For each plugin, call its 'constructor' and then wait for 1 second before
+  // calling the ".call()" method on that plugin.
+  // TODO: Fix this. It's soooo bad! At least use callbacks.....
+  // TODO: Use Object.keys()...
   for (var p in plugins) {
     var file = plugins[p].plugin;
     var plugin = require(file);
@@ -48,18 +52,18 @@ Plugins.prototype.call = function(name, socket, command) {
   for (var k in hook.plugins) {
     var p = hook.plugins[k];
 
-    if (p === undefined) {
+    if (typeof p === 'undefined') {
       err = "Unable to load plugin " + p;
       log.info(err);
       console.log(err);
       return;
     }
 
-    if (this._plugins[name] === undefined) {
+    if (typeof this._plugins[name] === 'undefined') {
       this._plugins[name] = Array();
     }
 
-    if (this._plugins[name][p] === undefined) {
+    if (typeof this._plugins[name][p] === 'undefined') {
       this.load(name, p);
     }
 
